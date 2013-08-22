@@ -1,0 +1,13 @@
+{
+    "name": "amkt922/ssql-gen",
+    "description": "The source generator for ssql.",
+    "authors": [
+        {
+            "name": "amkt922",
+            "email": "amkt922@gmail.com"
+        }
+    ],
+    "require": {
+		"amkt922/ssql": "*"
+    }
+}

@@ -1,0 +1,5 @@
+/nbproject/
+/vendor/
+.project
+/test/output/
+/test/sql/
