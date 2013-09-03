@@ -1,25 +1,45 @@
 <?php
+/*
+  Copyright 2013, amkt922 <amkt922@gmail.com>
 
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ */
 
 namespace SSqlGen;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
- * Description of ssql-gen-config
+ * Class for configure that is passed.
  *
- * @author p
+ * @author amkt922
  */
 class SSqlGenConfigure {
+
 	private static $config;
 
-	public static function config($config) {
+    /**
+     * method for set user config
+     * @param array $config
+     */
+    public static function config($config) {
 		self::$config = $config;
 	}
 
-	public static function get($key) {
+    /**
+     * method for get value in the config.
+     * @param string $key
+     * @return mixed
+     */
+    public static function get($key) {
 		return self::$config[$key];
 	}
 }

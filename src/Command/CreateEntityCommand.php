@@ -1,19 +1,27 @@
 <?php
+/*
+  Copyright 2013, amkt922 <amkt922@gmail.com>
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ */
 
 namespace SSqlGen\Command;
 
 use SSqlGen\SSqlGenConfigure;
 use SSql\SSql;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of AbstractCommand
- *
- * @author p
+ * @author amkt922
  */
 class CreateEntityCommand extends AbstractCommand {
 
@@ -45,7 +53,7 @@ class CreateEntityCommand extends AbstractCommand {
 
 	public function show() {
 		$menu = <<<MENU
-[S] Start.
+[S] Start to create.
 MENU;
 		$this->write($menu);	
 		$input = trim($this->read());	
