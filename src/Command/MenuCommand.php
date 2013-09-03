@@ -14,33 +14,33 @@ namespace SSqlGen\Command;
 class MenuCommand extends AbstractCommand {
 
 	public function process() {
-		
 	}
 
-	public function show($prevCmd) {
+	public function show() {
 		$menu = <<<MENU
-[A] Generate outside sql enum definition.
-[B] Generate entity classes.
-[Q] Quit.
+[E] Generate Entity classes.
+[O] Generate Outside sql enum definition.
+[Q] [Q]uit.
 MENU;
 		$this->write($menu);	
 		$input = trim($this->read());	
 
 		switch ($input) {
-		case 'A':
-			$aCmd = new SqlFileListCommand();
-			$aCmd->show($this);
+		case 'E':
+			$cmd = new CreateEntityCommand();
+			$cmd->show();
 			break;
-		case 'B':
+		case 'O':
+			$cmd = new SqlFileListCommand();
+			$cmd->show();
 			break;
 		case 'Q':
 			$this->write('Quit');	
-			exit();
 			break;
 		default:
-			$prevCmd->show($this);
 			break;
 		}
+        exit();
 	}
 }
 

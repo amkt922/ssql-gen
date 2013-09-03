@@ -19,7 +19,10 @@ use SSqlGen\SSqlGenConfigure;
  */
 class SSqlGenDispatcher {
 
-	private function __construct() {
+    /**
+     * constructor
+     */
+    private function __construct() {
 	}
 
 	public static function run($config) {
@@ -27,7 +30,6 @@ class SSqlGenDispatcher {
 		$self = new self();
 		$self->start();
 	}
-
 
 	public function start() {
 		$cmd = new MenuCommand();	

@@ -9,5 +9,9 @@ require_once 'SSqlGenConfig.php';
 
 use SSqlGen\SSqlGenDispatcher;
 
+$ssqlDir = SSqlGenConfig::$config['ssqlDir'];
+
+require_once $ssqlDir . 'autoload.php';
+
 SSqlGenDispatcher::run(SSqlGenConfig::$config);
 

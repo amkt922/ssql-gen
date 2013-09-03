@@ -25,7 +25,7 @@ class SqlFileListCommand extends AbstractCommand {
 			if ($file === '.' || $file === '..') {
 				continue;
 			}
-			// selectUser.sql to SELECT_USER
+			// enum value from filename. e.g. selectUser.sql to SELECT_USER
 			$keyName = str_replace('.sql', '', $file);	
 		    $keyName = preg_replace('/([A-Z])/', '_$1', $keyName);  
 			$keyName = strtoupper($keyName);
@@ -41,15 +41,14 @@ class SqlFileListCommand extends AbstractCommand {
 		extract($params);
 		ob_start();
 		include __DIR__ . '/Template/' . self::TEMPLATE_FILE;
-		$klazz = ob_get_contents();
+		$c = ob_get_contents();
 		ob_end_clean();
-		return $klazz;
+		return $c;
 	}
 
-	public function show($prevCmd) {
+	public function show() {
 		$menu = <<<MENU
-[A] start.
-[B] Back to Menu.
+[A] Start.
 MENU;
 		$this->write($menu);	
 		$input = trim($this->read());	
@@ -58,9 +57,6 @@ MENU;
 		case 'A':
 			$this->process();
 			$this->write('done.');	
-			break;
-		case 'B':
-			$prevCmd->show($this);
 			break;
 		default:
 			break;

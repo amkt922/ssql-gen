@@ -13,6 +13,7 @@ namespace SSqlGen\Command;
  */
 abstract class AbstractCommand {
 
+
 	const LF = PHP_EOL;
 
 	const STDIN = 'php://stdin';
@@ -25,7 +26,11 @@ abstract class AbstractCommand {
 
 	private $config = array();
 
-	public function __construct($config = null) {
+    /**
+     * constructor
+     * @param array $config
+     */
+    public function __construct($config = null) {
 		$this->in = fopen(self::STDIN, 'r');
 		$this->out = fopen(self::STDOUT, 'w');
 		if (!is_null($config)
@@ -36,14 +41,13 @@ abstract class AbstractCommand {
 
 	public function write($message) {
 		fwrite($this->out, $message);
-		fflush($this->out);
 	}
 
 	public function read() {
 		return fgets($this->in);
 	}
 	
-	abstract public function show($prevCmd);
+	abstract public function show();
 
 	abstract public function process();
 }

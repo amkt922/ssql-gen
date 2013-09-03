@@ -12,7 +12,12 @@
  */
 class SSqlGenConfig {
 	public static $config = array(
-		'sqlDir' => '../test/sql/'
+		'ssqlDir' => '../../ssql/src/'
+        , 'sqlDir' => '../test/sql/'
 		, 'outDir' => '../test/output/'
+        , 'database' => array('driver' => 'Mysql'
+                              , 'dsn' => 'mysql:host=localhost;dbname=ssql_test'
+                              , 'user' => 'root'
+                              , 'password' => 'admin')
 	);
 }
