@@ -21,13 +21,17 @@ echo "<?php\n";
 ?>
 
 /**
- * This file was generated at <?php echo date('yyyy/MM/dd HH:i:ss') ?> by ssql-gen.
+ * Sql files enumeration
+ *
+ * This file was generated at by ssql-gen.
  */
 class SqlFiles {
 
 <?php foreach ($sqlList as $key => $value): ?>
-	const <?php echo $key ?> = '<?php echo $value ?>';
-    <?php echo "\n" ?>
+    /**
+     * <?php echo $value['title'] ?>
+     */
+	const <?php echo $key ?> = '<?php echo $value['file'] ?>';
 <?php endforeach; ?>
 
 }

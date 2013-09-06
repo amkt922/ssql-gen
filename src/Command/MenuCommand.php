@@ -28,6 +28,7 @@ class MenuCommand extends AbstractCommand {
 	public function show() {
 		$menu = <<<MENU
 [E] Generate Entity classes.
+[M] Generate EntityMeta classes.
 [O] Generate Outside sql enum definition.
 [Q] [Q]uit.
 MENU;
@@ -37,6 +38,10 @@ MENU;
 		switch ($input) {
 		case 'E':
 			$cmd = new CreateEntityCommand();
+			$cmd->show();
+			break;
+		case 'M':
+			$cmd = new CreateEntityMetaCommand();
 			$cmd->show();
 			break;
 		case 'O':

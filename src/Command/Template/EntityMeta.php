@@ -19,17 +19,22 @@
 echo "<?php\n";
 ?>
 /**
- * Entity class for table <?php echo $tableName ?>
+ * EntityMeta class for table <?php echo $tableName ?>
  *
  * This file was generated at by ssql-gen.
  */
-class <?php echo $className ?> {
+class <?php echo $className ?>Meta {
+    /**
+     * table name
+     */
+    const TABLE_NAME = <?php echo $tableName ?>;
+
 <?php foreach ($columns as $column): ?>
     /**
-     * <?php echo $column['name'] ?> column
-     * @var <?php echo $column['type'] ?>
+     * column <?php echo $column['name'] ?> name
      */
-	public $<?php echo $column['name'] ?>;
+	const <?php echo $column['constName'] ?> = "<?php echo $column['name'] ?>";
+    <?php echo "\n" ?>
 <?php endforeach; ?>
 
 }

@@ -26,6 +26,10 @@ class SqlFileListCommand extends AbstractCommand {
 
 	const TEMPLATE_FILE = 'SqlFiles.php';
 
+    const TITLE_MARK = '[ssql:title]';
+
+    const DESC_MARK = '[ssql:description]';
+
 	public function process() {
 		$sqlDir = SSqlGenConfigure::get('sqlDir');	
 		$files = scandir($sqlDir);
@@ -38,13 +42,31 @@ class SqlFileListCommand extends AbstractCommand {
 			$keyName = str_replace('.sql', '', $file);	
 		    $keyName = preg_replace('/([A-Z])/', '_$1', $keyName);  
 			$keyName = strtoupper($keyName);
-			$sqlList[$keyName] = $file;
+            $contents = file_get_contents($sqlDir . $file);
+            $title = $this->getSqlTitle($contents);
+			$sqlList[$keyName] = array('file' => $file, 'title' => $title);
 		}
 
 		$def = $this->renderTemplate(compact('sqlList'));
 		$outDir = SSqlGenConfigure::get('outDir');
 		file_put_contents($outDir . self::TEMPLATE_FILE, $def);
 	}
+
+    private function getSqlTitle($contents) {
+        $titlePos = strpos($contents, self::TITLE_MARK);
+        $title = '';
+        if ($titlePos !== false) {
+            $titlePos +=  mb_strlen(self::TITLE_MARK);
+            $descPos = strpos($contents, self::DESC_MARK);
+            if ($descPos !== false) {
+                $title = mb_substr($contents, $titlePos, $descPos - $titlePos);
+            } else {
+                $endCommentPos = strpos($contents, '*/', $titlePos);
+                $title = mb_substr($contents, $titlePos, $endCommentPos - $titlePos);
+            }
+        }
+        return $title;
+    }
 
 	private function renderTemplate($params) {
 		extract($params);
@@ -57,13 +79,13 @@ class SqlFileListCommand extends AbstractCommand {
 
 	public function show() {
 		$menu = <<<MENU
-[A] Start.
+[S] Start.
 MENU;
 		$this->write($menu);	
 		$input = trim($this->read());	
 
 		switch ($input) {
-		case 'A':
+		case 'S':
 			$this->process();
 			$this->write('done.');	
 			break;
