@@ -39,12 +39,13 @@ class SqlFileListCommand extends AbstractCommand {
 				continue;
 			}
 			// enum value from filename. e.g. selectUser.sql to SELECT_USER
-			$keyName = str_replace('.sql', '', $file);	
+            $value = str_replace('.sql', '', $file);
+			$keyName = $value;
 		    $keyName = preg_replace('/([A-Z])/', '_$1', $keyName);  
 			$keyName = strtoupper($keyName);
             $contents = file_get_contents($sqlDir . $file);
             $title = $this->getSqlTitle($contents);
-			$sqlList[$keyName] = array('file' => $file, 'title' => $title);
+			$sqlList[$keyName] = array('file' => $value, 'title' => $title);
 		}
 
 		$def = $this->renderTemplate(compact('sqlList'));
@@ -65,6 +66,7 @@ class SqlFileListCommand extends AbstractCommand {
                 $title = mb_substr($contents, $titlePos, $endCommentPos - $titlePos);
             }
         }
+        $title = str_replace(array(' ', '*', "\r", "\n"), '', trim($title));
         return $title;
     }
 

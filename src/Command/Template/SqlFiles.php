@@ -28,10 +28,9 @@ echo "<?php\n";
 class SqlFiles {
 
 <?php foreach ($sqlList as $key => $value): ?>
-    /**
-     * <?php echo $value['title'] ?>
-     */
+    /** <?php echo trim($value['title']) ?> */
 	const <?php echo $key ?> = '<?php echo $value['file'] ?>';
+    <?php echo "\n" ?>
 <?php endforeach; ?>
 
 }
